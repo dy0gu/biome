@@ -1468,6 +1468,10 @@ export interface Nursery {
 	 */
 	noDescendingSpecificity?: RuleConfiguration_for_Null;
 	/**
+	 * Succinct description of the rule.
+	 */
+	noDestructuredProps?: RuleConfiguration_for_Null;
+	/**
 	 * Disallow direct assignments to document.cookie.
 	 */
 	noDocumentCookie?: RuleConfiguration_for_Null;
@@ -3320,6 +3324,7 @@ export type Category =
 	| "lint/nursery/noPackagePrivateImports"
 	| "lint/nursery/noProcessEnv"
 	| "lint/nursery/noProcessGlobal"
+	| "lint/nursery/noDestructuredProps"
 	| "lint/nursery/noReactSpecificProps"
 	| "lint/nursery/noRestrictedImports"
 	| "lint/nursery/noRestrictedTypes"
