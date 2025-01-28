@@ -3034,7 +3034,7 @@ pub struct Nursery {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub no_descending_specificity:
         Option<RuleConfiguration<biome_css_analyze::options::NoDescendingSpecificity>>,
-    #[doc = "Succinct description of the rule."]
+    #[doc = "Disallow destructuring props inside JSX components in Solid projects."]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub no_destructured_props:
         Option<RuleConfiguration<biome_js_analyze::options::NoDestructuredProps>>,
