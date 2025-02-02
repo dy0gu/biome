@@ -8,6 +8,7 @@ use crate::{
 use biome_diagnostics::{DiagnosticExt, Error, IoError, Severity};
 use camino::{Utf8DirEntry, Utf8Path, Utf8PathBuf};
 use oxc_resolver::{FsResolution, ResolveError, ResolveOptions, Resolver};
+use path_absolutize::Absolutize;
 use rayon::{scope, Scope};
 use std::fs::FileType;
 use std::panic::AssertUnwindSafe;
@@ -234,6 +235,12 @@ impl<'scope> OsTraversalScope<'scope> {
 
 impl<'scope> TraversalScope<'scope> for OsTraversalScope<'scope> {
     fn evaluate(&self, ctx: &'scope dyn TraversalContext, path: Utf8PathBuf) {
+        let path = match std::path::Path::new(&path).absolutize() {
+            Ok(std::borrow::Cow::Owned(absolutized)) => {
+                Utf8PathBuf::from_path_buf(absolutized).unwrap_or(path)
+            }
+            _ => path,
+        };
         let file_type = match path.metadata() {
             Ok(meta) => meta.file_type(),
             Err(err) => {
